@@ -1,74 +1,69 @@
-/* Заголовки с короткими линиями */
-.section-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    color: #6a0dad;
-    font-size: 1.8rem;
-    margin: 2rem 0;
-    text-align: center;
+/* Кастомные стили для кнопок в навигации */
+.nav-link {
+  background-color: #00a0e3;
+  color: white !important;
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin: 0 5px;
+  transition: background-color 0.3s;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.nav-link:hover {
+  background-color: #0088c3;
+}
+.nav-link.active {
+  background-color: #00a0e3;
+  color: white !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.nav-item:last-child .nav-link {
+  background-color: #de0d82;
+  margin-left: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.nav-item:last-child .nav-link:hover {
+  background-color: #c00b72;
 }
 
-.section-title::before,
-.section-title::after {
-    content: "";
-    display: block;
-    width: 40px; /* Длина линий */
-    height: 2px;
-    background: #6a0dad;
+/* Стили для карусели */
+.carousel-inner {
+  height: 60vh; /* Уменьшенная высота */
+  margin: 20px 100px 20px 125px; /* Слева больше (125px), справа меньше (100px) */
+  border-radius: 20px; /* Закругленные края */
+  overflow: hidden; /* Чтобы картинки обрезались по радиусу */
+  max-width: calc(100% - 225px); /* Ограничение ширины */
 }
-
-/* Шапка */
-.nav-link.text-primary {
-    color: #007bff !important;
-    font-weight: 500;
+.carousel-item {
+  position: relative; /* Для позиционирования фона и текста */
 }
-
-.btn-purple {
-    background: #6a0dad !important;
-    color: white !important;
-    border-radius: 20px;
-    padding: 8px 25px !important;
-    transition: 0.3s;
+.carousel-item img {
+  height: 100%; /* Картинка занимает всю высоту контейнера */
+  width: 100%; /* Картинка занимает всю ширину контейнера */
+  object-fit: cover; /* Сохраняет пропорции, обрезая лишнее */
 }
-
-.btn-purple:hover {
-    background: #5a0a9d !important;
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+  position: absolute;
+  top: 0; /* Растягиваем сверху */
+  left: 0; /* Растягиваем слева */
+  width: 100%; /* На всю ширину */
+  height: 100%; /* На всю высоту */
+  border-radius: 20px; /* Закругленные края в тон карусели */
+  display: flex; /* Flex для управления содержимым */
+  flex-direction: column; /* Вертикальное расположение текста */
+  justify-content: flex-start; /* Выравнивание сверху */
+  align-items: flex-start; /* Выравнивание слева */
+  padding: 30px; /* Отступы внутри фона */
 }
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .navbar-nav {
-        align-items: flex-start !important;
-        padding: 15px 0;
-    }
-
-    .nav-link.btn-purple {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    .section-title {
-        font-size: 1.5rem !important;
-        gap: 10px;
-    }
-
-    .section-title::before,
-    .section-title::after {
-        width: 30px; /* Укороченные линии на мобильных */
-    }
+.carousel-caption h1 {
+  color: white; /* Белый текст */
+  font-size: 5rem; /* Большой размер текста */
+  margin: 10px 0 10px 20px; /* Отступ снизу для расстояния до описания */
 }
-
-/* Стили для блоков и карточек */
-.block {
-    width: 200px;
-}
-
-.service-card, .project {
-    transition: transform 0.3s;
-}
-
-.service-card:hover, .project:hover {
-    transform: translateY(-5px);
+.carousel-caption p {
+  color: white; /* Белый текст для описания */
+  font-size: 2rem; /* Размер текста описания */
+  margin: 20px; /* Убираем лишние отступы */
 }
