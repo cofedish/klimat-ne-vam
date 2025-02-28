@@ -1,0 +1,74 @@
+/* Заголовки с короткими линиями */
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #6a0dad;
+    font-size: 1.8rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.section-title::before,
+.section-title::after {
+    content: "";
+    display: block;
+    width: 40px; /* Длина линий */
+    height: 2px;
+    background: #6a0dad;
+}
+
+/* Шапка */
+.nav-link.text-primary {
+    color: #007bff !important;
+    font-weight: 500;
+}
+
+.btn-purple {
+    background: #6a0dad !important;
+    color: white !important;
+    border-radius: 20px;
+    padding: 8px 25px !important;
+    transition: 0.3s;
+}
+
+.btn-purple:hover {
+    background: #5a0a9d !important;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .navbar-nav {
+        align-items: flex-start !important;
+        padding: 15px 0;
+    }
+
+    .nav-link.btn-purple {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 1.5rem !important;
+        gap: 10px;
+    }
+
+    .section-title::before,
+    .section-title::after {
+        width: 30px; /* Укороченные линии на мобильных */
+    }
+}
+
+/* Стили для блоков и карточек */
+.block {
+    width: 200px;
+}
+
+.service-card, .project {
+    transition: transform 0.3s;
+}
+
+.service-card:hover, .project:hover {
+    transform: translateY(-5px);
+}
