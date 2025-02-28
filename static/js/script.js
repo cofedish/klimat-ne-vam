@@ -1,67 +1,37 @@
-$(document).ready(function(){
-    // Главная карусель
-    $('.slider').slick({
-        autoplay: true,
-        dots: false,
-        arrows: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        prevArrow: '<button class="slick-prev">←</button>',
-        nextArrow: '<button class="slick-next">→</button>',
-    });
+window.addEventListener("load", function () {
+  // Получаем все элементы с классом .nav-link
+  const navLinks = document.querySelectorAll(".nav-link");
 
-    // Карусель клиентов
-    $('.clients-carousel').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 1500,
-        arrows: false,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2
-                }
-            }
-        ]
-    });
+  // Находим максимальную ширину среди всех ссылок
+  let maxWidth = 0;
+  navLinks.forEach((link) => {
+    const width = link.offsetWidth;
+    if (width > maxWidth) {
+      maxWidth = width;
+    }
+  });
 
-    // Плавная прокрутка
-    $('nav a').on('click', function(e) {
-        e.preventDefault();
-        const target = $(this.getAttribute('href'));
-        if (target.length) {
-            $('html, body').animate({
-                scrollTop: target.offset().top - 70
-            }, 800);
-        }
-    });
-
-    // Отправка формы
-    $('#contact-form').on('submit', function(e) {
-        e.preventDefault();
-        const formData = {
-            name: $('#name').val(),
-            phone: $('#phone').val()
-        };
-        fetch('https://example.com/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            $('#form-message').text('Форма успешно отправлена!');
-            console.log('Успех:', data);
-            $(this).trigger('reset');
-        })
-        .catch(error => {
-            $('#form-message').text('Ошибка при отправке формы.');
-            console.error('Ошибка:', error);
-        });
-    });
+  // Устанавливаем максимальную ширину для всех ссылок
+  navLinks.forEach((link) => {
+    link.style.width = maxWidth + "px";
+  });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  ); // Срабатывает, когда 20% элемента видны
+
+  document.querySelectorAll(".fade-in").forEach((el) => {
+    observer.observe(el);
+  });
+});
+
+
