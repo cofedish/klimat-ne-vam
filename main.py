@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # URL бота (где он будет слушать новые заявки)
-TELEGRAM_BOT_URL = 'http://localhost:8374/new_request'  # Поменяй на правильный URL (если бот работает локально, то localhost)
+TELEGRAM_BOT_URL = 'http://bot:8374/new_request'  # Поменяй на правильный URL (если бот работает локально, то localhost)
 
 
 @app.route('/callback', methods=['POST'])
