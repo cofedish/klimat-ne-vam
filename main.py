@@ -32,7 +32,7 @@ def get_chat_id(username):
         print(f"Ошибка при запросе: {response.status_code}")
         return None
 
-TELEGRAM_CHAT_ID = get_chat_id("COFEDISH")
+TELEGRAM_CHAT_ID = get_chat_id(os.getenv("TELEGRAM_USERNAME"))
 
 
 @app.route('/new_request', methods=['POST'])

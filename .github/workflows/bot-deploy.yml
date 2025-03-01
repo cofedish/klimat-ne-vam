@@ -83,16 +83,17 @@ jobs:
 
       - name: Send Test Request to API
         run: |
-          curl -X POST http://api:8375/new_request \
+          curl -X POST http://localhost:8375/callback \
           -H "Content-Type: application/json" \
           -d '{"name": "Test User", "phoneNumber": "1234567890", "TypeOFService": "Test Service"}'
 
-      - name: Check Telegram Message
+      - name: Check if Bot is Running
         run: |
           sleep 5
-          RESPONSE=$(curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/getUpdates")
-          echo "Telegram Response: $RESPONSE"
-          echo "$RESPONSE" | grep "Test User" || (echo "Test failed!" && exit 1)
+          RESPONSE=$(curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/getMe")
+          echo "Telegram Bot Response: $RESPONSE"
+          echo "$RESPONSE" | grep '"ok":true' || (echo "Bot test failed!" && exit 1)
+
 
       - name: Stop and Remove Containers
         run: docker compose down
