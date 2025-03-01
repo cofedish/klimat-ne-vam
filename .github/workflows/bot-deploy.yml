@@ -76,7 +76,7 @@ jobs:
         run: docker build -t electro_api:test -f api/Dockerfile ./api
 
       - name: Run Services for Testing
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait for services to start
         run: sleep 10
@@ -95,7 +95,7 @@ jobs:
           echo "$RESPONSE" | grep "Test User" || (echo "Test failed!" && exit 1)
 
       - name: Stop and Remove Containers
-        run: docker-compose down
+        run: docker compose down
 
       - name: Push Bot Image
         if: success()
