@@ -1,0 +1,53 @@
+name: API Docker Build, Push & GitHub Release
+
+on:
+  push:
+    branches:
+      - API  # Запускаем только при изменениях в ветке API
+
+permissions:
+  contents: write  # Даем права на создание релизов
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build-and-release-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Загружаем всю историю
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build and Push API Docker Image
+        run: |
+          docker build -t $DOCKER_USERNAME/electro_api:latest -f Dockerfile .
+          docker push $DOCKER_USERNAME/electro_api:latest
+
+      - name: Archive Source Code
+        run: zip -r api-release.zip . -x ".git/*"
+
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-package
+          path: api-release.zip
+
+      - name: Create GitHub Release for API
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: api-v1.0.${{ github.run_number }}
+          name: API Release v1.0.${{ github.run_number }}
+          body: "Автоматически созданный релиз для API."
+          draft: false
+          prerelease: false
+          files: api-release.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
