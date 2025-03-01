@@ -1,3 +1,20 @@
+/* Фиксированная шапка */
+.navbar {
+    position: fixed !important;
+    top: 0; /* Видна сразу при загрузке */
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: top 0.5s ease;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Скрываем шапку при прокрутке вниз */
+.navbar.hidden {
+    top: -70px !important;
+}
+
 /* Общие стили для навигации */
 .nav-link {
     background-color: #00a0e3;
@@ -5,58 +22,65 @@
     border-radius: 20px;
     padding: 8px 16px;
     margin: 5px;
-    transition: background-color 0.3s;
+    transition: all 0.3s; /* Добавлено для плавности */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    white-space: nowrap; /* Запрещает перенос текста */
+    white-space: nowrap;
 }
 
 .nav-link:hover {
     background-color: #0088c3;
+    transform: translateY(-2px); /* Эффект приподнятия */
 }
 
+/* Активная кнопка */
 .nav-link.active {
-    background-color: #00a0e3;
-    color: white !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #654694 !important; /* Фиолетовый как в проекте */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Последняя кнопка (Связаться с нами) */
 .nav-item:last-child .nav-link {
     background-color: #de0d82;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav-item:last-child .nav-link:hover {
     background-color: #c00b72;
+    transform: translateY(-2px);
 }
 
-
-/* Делаем навигацию адаптивной */
+/* Адаптивность */
 @media (max-width: 991px) {
     .navbar-nav {
         flex-direction: column;
         align-items: center;
+        gap: 10px; /* Добавлено расстояние между кнопками */
     }
 
     .nav-link {
-        width: 100%; /* Полная ширина на маленьких экранах */
-        text-align: center;
+        width: 100%;
+        margin: 3px; /* Уменьшенный отступ */
     }
 
     .nav-item:last-child .nav-link {
-        margin-left: 0; /* Убираем сдвиг на узких экранах */
+        margin-top: 10px; /* Отступ для последней кнопки */
     }
+}
+
+/* Отступ для контента под шапкой */
+body {
+    padding-top: 70px;
 }
 
 /* Стили для карусели */
 
 #carouselExample {
-    max-width: 90%; /* Максимальная ширина карусели */
+    max-width: 80%; /* Максимальная ширина карусели */
     margin: 20px auto; /* Центрирование с отступом сверху и снизу */
     padding-bottom: 10px; /* Уменьшаем отступ снизу */
     border-radius: 15px; /* Закругленные углы */
     overflow: hidden; /* Обрезка содержимого */
-    height: 85vh; /* Высота карусели 85% от высоты экрана */
+    height: 75vh; /* Высота карусели 85% от высоты экрана */
 }
 
 #carouselExample .carousel-inner,
