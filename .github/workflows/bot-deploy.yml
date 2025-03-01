@@ -1,33 +1,62 @@
-name: Bot Docker Build & Push
+name: Bot Docker Build, Push & GitHub Release
 
 on:
   push:
     branches:
-      - tg_bot  # Ветка, где лежит код бота
+      - tg_bot  # Запускаем только при изменениях в ветке бота
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  build-and-push-bot:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Загружаем код репозитория
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Загружаем весь репозиторий
+          fetch-depth: 0  # Загружаем все коммиты
 
+      # 2️⃣ Логинимся в Docker Hub
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
+      # 3️⃣ Создаём `.env` файл для переменных окружения
       - name: Create .env file
         run: |
           echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" > .env
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
 
+      # 4️⃣ Собираем и пушим Docker-образ бота
       - name: Build and Push Bot Docker Image
         run: |
           docker build -t $DOCKER_USERNAME/electro_bot:latest -f Dockerfile .
           docker push $DOCKER_USERNAME/electro_bot:latest
+
+      # 5️⃣ Создаём ZIP-архив с исходниками для релиза
+      - name: Archive Source Code
+        run: zip -r bot-release.zip . -x ".git/*"
+
+      # 6️⃣ Загружаем архив в GitHub как артефакт
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: bot-package
+          path: bot-release.zip
+
+      # 7️⃣ Создаём GitHub Release (если это push в `tg_bot`)
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Release v1.0.${{ github.run_number }}
+          body: "Автоматически созданный релиз для бота."
+          draft: false
+          prerelease: false
+          files: bot-release.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
