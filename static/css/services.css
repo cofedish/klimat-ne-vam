@@ -1,26 +1,5 @@
 /* Раздел "Услуги" */
-.services {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    padding: 40px 0;
-  }
-  
-  .services-title {
-    color: #654694;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 2rem;
-    position: relative;
-    display: inline-block;
-    padding: 0 20px;
-  }
-  
-  .services-description {
-    font-size: 1.2rem;
-    color: #666;
-  }
-  
+
   /* Стили кнопок */
   .service-btn {
     margin: 5px;

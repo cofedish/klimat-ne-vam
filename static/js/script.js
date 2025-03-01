@@ -34,58 +34,139 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
   const services = {
-      ventilation: [
-          { image: "static/images/ventilation1.jpg", title: "Монтаж систем вентиляции" },
-          { image: "static/images/ventilation2.jpg", title: "Очистка и обслуживание" },
-          { image: "static/images/ventilation3.jpg", title: "Проектирование вентиляции" }
-      ],
-      conditioning: [
-          { image: "static/images/conditioning1.jpg", title: "Установка кондиционеров" },
-          { image: "static/images/conditioning2.jpg", title: "Обслуживание и ремонт" },
-          { image: "static/images/conditioning3.jpg", title: "Заправка фреоном" }
-      ],
-      electronics: [
-          { image: "static/images/electronics1.jpg", title: "Штробирование" },
-          { image: "static/images/electronics2.jpg", title: "Установка ламп" },
-          { image: "static/images/electronics3.jpg", title: "Установка датчиков" }
-      ]
+    electronics: [
+      {
+        image: "static/images/services/electro1.png",
+        title: "Монтаж розеток",
+        description:
+          "Профессиональная установка розеток с учетом всех норм безопасности и удобства.",
+      },
+      {
+        image: "static/images/services/electro2.png",
+        title: "Монтаж выключателей",
+        description:
+          "Качественная установка выключателей для комфортного управления освещением.",
+      },
+      {
+        image: "static/images/services/electro3.png",
+        title: "Монтаж светильников",
+        description:
+          "Грамотное подключение и установка светильников для создания уютного освещения.",
+      },
+      {
+        image: "static/images/services/electro4.png",
+        title: "Прокладка электропроводки",
+        description:
+          "Разводка и монтаж электропроводки с учетом требований надежности и безопасности.",
+      },
+      {
+        image: "static/images/services/electro5.png",
+        title: "Установка автоматов и УЗО",
+        description:
+          "Монтаж и настройка защитных устройств для предотвращения коротких замыканий и перегрузок.",
+      },
+      {
+        image: "static/images/services/electro6.png",
+        title: "Штробление стен под проводку",
+        description:
+          "Аккуратное и точное штробление стен для скрытого монтажа электропроводки.",
+      },
+      {
+        image: "static/images/services/electro7.png",
+        title: "Монтаж датчиков",
+        description:
+          "Установка датчиков движения, дыма, утечки газа и других систем безопасности.",
+      },
+      {
+        image: "static/images/services/electro8.png",
+        title: "Комплектация и доставка материалов",
+        description:
+          "Подбор и поставка качественных электротехнических материалов для вашего проекта.",
+      },
+    ],
+    ventilation: [
+      {
+        image: "static/images/services/vent1.png",
+        title: "Проектирование и монтаж вентиляции",
+        description:
+          "Разработка эффективных систем вентиляции для комфортного микроклимата.",
+      },
+      {
+        image: "static/images/services/vent2.png",
+        title: "Установка вытяжных систем",
+        description:
+          "Монтаж вытяжных систем для обеспечения свежего воздуха в помещениях.",
+      },
+      {
+        image: "static/images/services/vent3.png",
+        title: "Комплектация и поставка материалов",
+        description:
+          "Доставка и подбор необходимых компонентов для систем вентиляции.",
+      },
+    ],
+    conditioning: [
+      {
+        image: "static/images/services/cond1.png",
+        title: "Монтаж кондиционирования",
+        description:
+          "Проектирование и установка современных систем кондиционирования для любого типа помещений.",
+      },
+      {
+        image: "static/images/services/cond2.png",
+        title: "Системы холодоснабжения",
+        description:
+          "Проектирование и внедрение промышленных и бытовых систем охлаждения.",
+      },
+      {
+        image: "static/images/services/cond3.png",
+        title: "Комплектация и поставка оборудования",
+        description:
+          "Подбор, закупка и доставка всех необходимых комплектующих для кондиционирования.",
+      },
+    ],
   };
 
   const buttons = document.querySelectorAll(".service-btn");
   const container = document.querySelector(".service-cards-container");
 
-  buttons.forEach(button => {
-      button.addEventListener("click", function () {
-          const category = this.getAttribute("data-category");
+  // Функция загрузки карточек
+  function loadCards(category) {
+    container.innerHTML = "";
 
-          // Очищаем контейнер перед добавлением новых карточек
-          container.innerHTML = "";
+    services[category].forEach((service, index) => {
+      const card = document.createElement("div");
+      card.classList.add("col-md-4", "service-card");
+      card.setAttribute("data-aos", "fade-up");
+      card.setAttribute("data-aos-delay", index * 100);
 
-          // Добавляем новые карточки
-          services[category].forEach((service, index) => {
-              const card = document.createElement("div");
-              card.classList.add("col-md-4", "service-card");
-              card.setAttribute("data-aos", "fade-up");
-              card.setAttribute("data-aos-delay", index * 100); // Анимация с задержкой
-              
-              card.innerHTML = `
-                  <div class="card shadow-sm">
-                      <img src="${service.image}" class="card-img-top" alt="${service.title}">
-                      <div class="card-body text-center">
-                          <h5 class="card-title">${service.title}</h5>
-                      </div>
+      card.innerHTML = `
+              <div class="card shadow-sm">
+                  <img src="${service.image}" class="card-img-top" alt="${service.title}">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">${service.title}</h5>
+                      <p class="card-text">${service.description}</p>
                   </div>
-              `;
-              container.appendChild(card);
-          });
+              </div>
+          `;
+      container.appendChild(card);
+    });
 
-          // Инициализируем AOS заново для новой анимации
-          AOS.init();
-      });
+    AOS.init();
+  }
+
+  // Выбираем начальную категорию (по умолчанию "Электроника")
+  let activeCategory = "electronics";
+  loadCards(activeCategory);
+
+  // Обработчик клика по кнопкам
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      buttons.forEach((btn) => btn.classList.remove("active")); // Убираем активный класс
+      this.classList.add("active"); // Добавляем активный класс
+      activeCategory = this.getAttribute("data-category");
+      loadCards(activeCategory);
+    });
   });
 });
-
-
