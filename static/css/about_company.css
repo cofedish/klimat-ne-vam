@@ -1,10 +1,4 @@
-/* Основные стили */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-}
-
-.section-title {
+#about .about-title {
   color: #654694;
   font-weight: bold;
   text-transform: uppercase;
@@ -15,8 +9,8 @@ body {
   padding: 0 20px;
 }
 
-.section-title::before,
-.section-title::after {
+#about .about-title::before,
+#about .about-title::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -25,44 +19,42 @@ body {
   background-color: #654694;
 }
 
-.section-title::before {
+#about .about-title::before {
   left: -70px;
 }
 
-.section-title::after {
+#about .about-title::after {
   right: -70px;
 }
 
-.fact-card h5 {
-  font-size: 1.4rem;
+/* Выровняем высоту и ширину карточек */
+#about .row .col-md-4 {
+  display: flex;
+  flex-grow: 1; /* Равномерное распределение колонок */
 }
 
-.fact-card p {
-  flex-grow: 1;
-  /* Заполняет оставшееся пространство */
-}
-
-
-/* Анимация карточек */
-.fact-card {
+#about .about-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  height: 100%;
-  /* Одинаковая высота */
+  justify-content: space-between; /* Равномерное распределение */
+  height: 100%; /* Одинаковая высота */
+  width: 100%; /* Одинаковая ширина */
 }
 
-.fact-card:hover {
+#about .about-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.fact-card p {
-  flex-grow: 1;
-  /* Заполняет оставшееся пространство */
+/* Иконки */
+#about .about-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
 }
 
 /* Цвета иконок */
@@ -76,40 +68,4 @@ body {
 
 .icon-purple {
   color: #654694;
-}
-
-/* Анимация появления */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in.animate {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (max-width: 768px) {
-    .fact-card {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .fact-card {
-        margin-bottom: 20px;
-    }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
