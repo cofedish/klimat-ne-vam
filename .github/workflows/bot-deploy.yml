@@ -48,7 +48,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v1.0.${{ github.run_number }}
-          name: Release v1.0.${{ github.run_number }}
+          name: Bot_Release v1.0.${{ github.run_number }}
           body: "Автоматически созданный релиз для бота."
           draft: false
           prerelease: false
