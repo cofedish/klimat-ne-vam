@@ -28,8 +28,7 @@ jobs:
       # 3️⃣ Создаём `.env` файл для переменных окружения
       - name: Create .env file
         run: |
-          echo "BOT_TOKEN=${{ secrets.BOT_TOKEN }}" > .env
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" > .env
 
       # 4️⃣ Собираем и пушим Docker-образ бота
       - name: Build and Push Bot Docker Image
@@ -41,9 +40,9 @@ jobs:
       - name: Archive Source Code
         run: zip -r bot-release.zip . -x ".git/*"
 
-      # 6️⃣ Загружаем архив в GitHub как артефакт
+      # 6️⃣ Загружаем архив в GitHub как артефакт (НОВАЯ ВЕРСИЯ)
       - name: Upload Release Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # Обновлённая версия
         with:
           name: bot-package
           path: bot-release.zip
