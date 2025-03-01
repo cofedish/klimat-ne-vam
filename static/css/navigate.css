@@ -59,24 +59,24 @@
     height: 85vh; /* Высота карусели 85% от высоты экрана */
 }
 
-.carousel-inner,
-.carousel-item {
+#carouselExample .carousel-inner,
+#carouselExample .carousel-item {
     border-radius: 15px; /* Закругленные углы для всех частей карусели */
     height: 100%; /* Высота 100% от родительского контейнера */
 }
 
-.carousel-inner img {
+#carouselExample .carousel-inner img {
     object-fit: cover; /* Обеспечивает обрезку изображения, сохраняя пропорции */
     width: 100%; /* Изображение растягивается на всю ширину */
     height: 100%; /* Высота изображения на 100% от высоты карусели */
 }
 
-.carousel-item {
+#carouselExample .carousel-item {
     position: relative;
     border-radius: 15px; /* Закругленные углы для каждого слайда */
 }
 
-.carousel-item::after {
+#carouselExample .carousel-item::after {
     content: "";
     position: absolute;
     top: 0;
@@ -87,7 +87,7 @@
     z-index: 1;
 }
 
-.carousel-caption {
+#carouselExample .carousel-caption {
     position: absolute;
     top: 20%; /* Сдвигаем текст выше */
     left: 10%; /* Сдвигаем текст влево */
@@ -99,12 +99,12 @@
     background: none; /* Убираем фон */
 }
 
-.carousel-caption h1 {
+#carouselExample .carousel-caption h1 {
     font-size: 4.5rem; /* Увеличиваем размер заголовка */
     font-weight: bold;
 }
 
-.carousel-caption p {
+#carouselExample .carousel-caption p {
     font-size: 2rem; /* Увеличиваем размер описания */
     margin-top: 10px; /* Отступ сверху для описания */
 }
