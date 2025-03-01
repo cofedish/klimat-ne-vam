@@ -22,27 +22,28 @@ jobs:
       - name: Checkout Bot repository
         uses: actions/checkout@v3
         with:
-          path: bot  # Скачиваем код бота в папку bot
+          path: bot
 
       - name: Checkout API repository (for tests)
         uses: actions/checkout@v3
         with:
           repository: ${{ github.repository }}
-          ref: API  # Берем API-код из другой ветки
-          path: api  # Скачиваем код API в папку api
+          ref: API
+          path: api
 
-      # 🔍 Отладка - Проверяем файлы
       - name: Debug - List repo contents
         run: ls -R
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # 🔹 Создаём тестовый `docker-compose.yml`
       - name: Create test docker-compose.yml
         run: |
           cat <<EOF > docker-compose.yml
           version: '3.8'
+          networks:
+            custom_network:
+              driver: bridge
           services:
             api:
               build: ./api
@@ -52,6 +53,8 @@ jobs:
                 - "8375:8375"
               environment:
                 - FLASK_ENV=production
+              networks:
+                - custom_network
 
             bot:
               build: ./bot
@@ -62,25 +65,25 @@ jobs:
               environment:
                 - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
                 - TELEGRAM_USERNAME=${TELEGRAM_USERNAME}
+              networks:
+                - custom_network
           EOF
 
       - name: Build Bot Image
-        run: |
-          docker build --build-arg TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} --build-arg TELEGRAM_USERNAME=${{ secrets.TELEGRAM_USERNAME }} -t electro_bot:test -f bot/Dockerfile ./bot
+        run: docker build -t electro_bot:test -f bot/Dockerfile ./bot
 
-      - name: Build API Image
-        run: |
-          docker build -t electro_api:test -f api/Dockerfile ./api
+      - name: Build API Image (for testing)
+        run: docker build -t electro_api:test -f api/Dockerfile ./api
 
       - name: Run Services for Testing
-        run: docker compose up -d
+        run: docker-compose up -d
 
       - name: Wait for services to start
         run: sleep 10
 
       - name: Send Test Request to API
         run: |
-          curl -X POST http://localhost:8375/new_request \
+          curl -X POST http://api:8375/new_request \
           -H "Content-Type: application/json" \
           -d '{"name": "Test User", "phoneNumber": "1234567890", "TypeOFService": "Test Service"}'
 
@@ -92,7 +95,7 @@ jobs:
           echo "$RESPONSE" | grep "Test User" || (echo "Test failed!" && exit 1)
 
       - name: Stop and Remove Containers
-        run: docker compose down
+        run: docker-compose down
 
       - name: Push Bot Image
         if: success()
