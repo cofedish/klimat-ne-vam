@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8375
 
 # Запускаем API-сервер (Flask) на порту 8375
-CMD ["python", "api_server.py"]
+CMD ["python", "main.py"]
