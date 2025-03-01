@@ -1,44 +1,94 @@
-name: API Docker Build, Push & GitHub Release
+name: API Test, Build & Deploy
 
 on:
   push:
     branches:
-      - API  # Запускаем только при изменениях в ветке API
+      - API
 
 permissions:
-  contents: write  # Даем права на создание релизов
+  contents: write
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_USERNAME: ${{ secrets.TELEGRAM_USERNAME }}
 
 jobs:
-  build-and-release-api:
+  test-and-deploy-api:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout API repository
+        uses: actions/checkout@v3
+
+      - name: Checkout Bot repository (for tests)
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Загружаем всю историю
+          repository: ${{ github.repository }}
+          ref: tg_bot  # Берем код из другой ветки
+          path: bot  # Скачиваем в папку bot
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build and Push API Docker Image
+      # 🔹 Создаём тестовый `docker-compose.yml`
+      - name: Create test docker-compose.yml
         run: |
-          docker build -t $DOCKER_USERNAME/electro_api:latest -f Dockerfile .
+          cat <<EOF > docker-compose.yml
+          version: '3.8'
+          services:
+            api:
+              image: electro_api:test
+              container_name: electro_api
+              restart: always
+              ports:
+                - "8375:8375"
+              environment:
+                - FLASK_ENV=production
+
+            bot:
+              build: ./bot
+              container_name: electro_bot
+              restart: always
+              ports:
+                - "8374:8374"
+              environment:
+                - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+                - TELEGRAM_USERNAME=${TELEGRAM_USERNAME}
+          EOF
+
+      - name: Build API Image
+        run: |
+          docker build --build-arg TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} --build-arg TELEGRAM_USERNAME=${{ secrets.TELEGRAM_USERNAME }} -t electro_api:test -f api/Dockerfile .
+
+      - name: Run Services for Testing
+        run: docker-compose up -d
+
+      - name: Wait for services to start
+        run: sleep 10
+
+      - name: Send Test Request to API
+        run: |
+          curl -X POST http://localhost:8375/new_request \
+          -H "Content-Type: application/json" \
+          -d '{"name": "Test User", "phoneNumber": "1234567890", "TypeOFService": "Test Service"}'
+
+      - name: Check Telegram Message
+        run: |
+          sleep 5
+          RESPONSE=$(curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/getUpdates")
+          echo "Telegram Response: $RESPONSE"
+          echo "$RESPONSE" | grep "Test User" || (echo "Test failed!" && exit 1)
+
+      - name: Stop and Remove Containers
+        run: docker-compose down
+
+      - name: Push API Image
+        if: success()
+        run: |
+          docker tag electro_api:test $DOCKER_USERNAME/electro_api:latest
           docker push $DOCKER_USERNAME/electro_api:latest
-
-      - name: Archive Source Code
-        run: zip -r api-release.zip . -x ".git/*"
-
-      - name: Upload Release Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-package
-          path: api-release.zip
 
       - name: Create GitHub Release for API
         uses: softprops/action-gh-release@v1
@@ -48,6 +98,5 @@ jobs:
           body: "Автоматически созданный релиз для API."
           draft: false
           prerelease: false
-          files: api-release.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
