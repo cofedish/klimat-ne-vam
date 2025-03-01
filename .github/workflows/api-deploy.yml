@@ -21,13 +21,19 @@ jobs:
     steps:
       - name: Checkout API repository
         uses: actions/checkout@v3
+        with:
+          path: api  # Скачиваем код API в папку api
 
       - name: Checkout Bot repository (for tests)
         uses: actions/checkout@v3
         with:
           repository: ${{ github.repository }}
-          ref: tg_bot  # Берем код из другой ветки
-          path: bot  # Скачиваем в папку bot
+          ref: tg_bot  # Берем код бота из другой ветки
+          path: bot  # Скачиваем код бота в папку bot
+
+      # 🔍 Отладка - Проверяем файлы
+      - name: Debug - List repo contents
+        run: ls -R
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
@@ -39,7 +45,7 @@ jobs:
           version: '3.8'
           services:
             api:
-              image: electro_api:test
+              build: ./api
               container_name: electro_api
               restart: always
               ports:
@@ -60,7 +66,11 @@ jobs:
 
       - name: Build API Image
         run: |
-          docker build --build-arg TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} --build-arg TELEGRAM_USERNAME=${{ secrets.TELEGRAM_USERNAME }} -t electro_api:test -f api/Dockerfile .
+          docker build -t electro_api:test -f api/Dockerfile ./api
+
+      - name: Build Bot Image (for testing)
+        run: |
+          docker build --build-arg TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} --build-arg TELEGRAM_USERNAME=${{ secrets.TELEGRAM_USERNAME }} -t electro_bot:test -f bot/Dockerfile ./bot
 
       - name: Run Services for Testing
         run: docker-compose up -d
