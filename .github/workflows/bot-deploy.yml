@@ -1,53 +1,102 @@
-name: Bot Docker Build, Push & GitHub Release
+name: Bot Test, Build & Deploy
 
 on:
   push:
     branches:
-      - tg_bot  # Запускаем только при изменениях в ветке бота
+      - tg_bot
 
 permissions:
-  contents: write  # Даем права на создание релизов
+  contents: write
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_USERNAME: ${{ secrets.TELEGRAM_USERNAME }}
 
 jobs:
-  build-and-release:
+  test-and-deploy-bot:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Bot repository
+        uses: actions/checkout@v3
+
+      - name: Checkout API repository (for tests)
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Загружаем все коммиты
+          repository: ${{ github.repository }}
+          ref: API  # Берем API-код из другой ветки
+          path: api  # Скачиваем в папку api
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build and Push Bot Docker Image
+      # 🔹 Создаём тестовый `docker-compose.yml`
+      - name: Create test docker-compose.yml
         run: |
-          docker build -t $DOCKER_USERNAME/electro_bot:latest -f Dockerfile .
+          cat <<EOF > docker-compose.yml
+          version: '3.8'
+          services:
+            api:
+              build: ./api
+              container_name: electro_api
+              restart: always
+              ports:
+                - "8375:8375"
+              environment:
+                - FLASK_ENV=production
+
+            bot:
+              image: electro_bot:test
+              container_name: electro_bot
+              restart: always
+              ports:
+                - "8374:8374"
+              environment:
+                - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+                - TELEGRAM_USERNAME=${TELEGRAM_USERNAME}
+          EOF
+
+      - name: Build Bot Image
+        run: |
+          docker build --build-arg TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} --build-arg TELEGRAM_USERNAME=${{ secrets.TELEGRAM_USERNAME }} -t electro_bot:test -f bot/Dockerfile .
+
+      - name: Run Services for Testing
+        run: docker-compose up -d
+
+      - name: Wait for services to start
+        run: sleep 10
+
+      - name: Send Test Request to API
+        run: |
+          curl -X POST http://localhost:8375/new_request \
+          -H "Content-Type: application/json" \
+          -d '{"name": "Test User", "phoneNumber": "1234567890", "TypeOFService": "Test Service"}'
+
+      - name: Check Telegram Message
+        run: |
+          sleep 5
+          RESPONSE=$(curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/getUpdates")
+          echo "Telegram Response: $RESPONSE"
+          echo "$RESPONSE" | grep "Test User" || (echo "Test failed!" && exit 1)
+
+      - name: Stop and Remove Containers
+        run: docker-compose down
+
+      - name: Push Bot Image
+        if: success()
+        run: |
+          docker tag electro_bot:test $DOCKER_USERNAME/electro_bot:latest
           docker push $DOCKER_USERNAME/electro_bot:latest
 
-      - name: Archive Source Code
-        run: zip -r bot-release.zip . -x ".git/*"
-
-      - name: Upload Release Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: bot-package
-          path: bot-release.zip
-
-      - name: Create GitHub Release
+      - name: Create GitHub Release for Bot
         uses: softprops/action-gh-release@v1
         with:
           tag_name: bot-v1.0.${{ github.run_number }}
-          name: Bot_Release v1.0.${{ github.run_number }}
-          body: "Автоматически созданный релиз для бота."
+          name: Bot Release v1.0.${{ github.run_number }}
+          body: "Автоматически созданный релиз для Бота."
           draft: false
           prerelease: false
-          files: bot-release.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
