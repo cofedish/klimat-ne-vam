@@ -41,8 +41,8 @@ def callback():
             'http://bot:8374/new_request',
             json={
                 'name': data['name'],
-                'phone_number': data['phoneNumber'],
-                'type_of_service': data['TypeOFService']
+                'phone_number': data['phone_number'],
+                'type_of_service': data['type_of_service']
             }
         )
 
