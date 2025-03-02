@@ -26,16 +26,16 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t your-image-name:latest .
-          docker tag your-image-name:latest $DOCKER_USERNAME/your-image-name:latest
+          docker tag your-image-name:latest $DOCKER_USERNAME/klimatnevam-site:latest
 
       - name: Push Docker Image
-        run: docker push $DOCKER_USERNAME/your-image-name:latest
+        run: docker push $DOCKER_USERNAME/klimatnevam-site:latest
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v1.0.${{ github.run_number }}"
-          name: "Release v1.0.${{ github.run_number }}"
+          tag_name: "web-v1.0.${{ github.run_number }}"
+          name: "Web Release v1.0.${{ github.run_number }}"
           body: "Автоматически созданный релиз"
           draft: false
           prerelease: false
