@@ -1,11 +1,12 @@
 import requests
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Импортируем CORS
 
 app = Flask(__name__)
+CORS(app)  # Включаем CORS для всех роутов
 
 # URL бота (где он будет слушать новые заявки)
 TELEGRAM_BOT_URL = 'http://bot:8374/new_request'  # Поменяй на правильный URL (если бот работает локально, то localhost)
-
 
 @app.route('/callback', methods=['POST'])
 def callback():
