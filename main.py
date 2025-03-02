@@ -33,7 +33,7 @@ def callback():
         data = request.get_json()
         app.logger.debug('Request data: %s', data)
 
-        if not all(key in data for key in ['name', 'phoneNumber', 'TypeOFService']):
+        if not all(key in data for key in ['name', 'phone_number', 'type_of_service']):
             return jsonify({'error': 'Missing fields'}), 400
 
         # Отправка в Telegram-бот
