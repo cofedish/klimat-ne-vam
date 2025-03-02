@@ -49,6 +49,19 @@
     transform: translateY(-2px);
 }
 
+/* Десктопное меню */
+@media (min-width: 992px) {
+    .navbar-nav {
+        margin-left: auto !important;
+        justify-content: flex-end;
+        gap: 15px;
+    }
+
+    .nav-item:last-child .nav-link {
+        margin-right: 20px;
+    }
+}
+
 /* Адаптивность */
 @media (max-width: 991px) {
     .navbar-nav {
