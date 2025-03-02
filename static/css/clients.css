@@ -1,0 +1,46 @@
+/* Стили ленты */
+.clients-track-wrapper {
+    overflow: hidden;
+    position: relative;
+    padding: 30px 0;
+}
+
+.clients-track {
+    display: flex;
+    gap: 60px;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+}
+
+/* Пауза анимации при наведении */
+.clients-track-wrapper:hover .clients-track {
+    animation-play-state: paused;
+}
+
+/* Логотипы */
+.client-logo {
+    width: 120px;
+    height: 75px;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.client-logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Анимация прокрутки */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .clients-track { gap: 30px; }
+    .client-logo { width: 90px; }
+}

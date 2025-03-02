@@ -1,69 +1,35 @@
 /* Кастомные стили для кнопок в навигации */
-.nav-link {
-  background-color: #00a0e3;
-  color: white !important;
-  border-radius: 20px;
-  padding: 8px 16px;
-  margin: 0 5px;
-  transition: background-color 0.3s;
-  width: 150px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.nav-link:hover {
-  background-color: #0088c3;
-}
-.nav-link.active {
-  background-color: #00a0e3;
-  color: white !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.nav-item:last-child .nav-link {
-  background-color: #de0d82;
-  margin-left: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.nav-item:last-child .nav-link:hover {
-  background-color: #c00b72;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
 }
 
-/* Стили для карусели */
-.carousel-inner {
-  height: 60vh; /* Уменьшенная высота */
-  margin: 20px 100px 20px 125px; /* Слева больше (125px), справа меньше (100px) */
-  border-radius: 20px; /* Закругленные края */
-  overflow: hidden; /* Чтобы картинки обрезались по радиусу */
-  max-width: calc(100% - 225px); /* Ограничение ширины */
+
+h2 {
+  color: #654694;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 2rem;
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
 }
-.carousel-item {
-  position: relative; /* Для позиционирования фона и текста */
+
+p.description {
+  font-size: 1.2rem;
+  color: #666;
 }
-.carousel-item img {
-  height: 100%; /* Картинка занимает всю высоту контейнера */
-  width: 100%; /* Картинка занимает всю ширину контейнера */
-  object-fit: cover; /* Сохраняет пропорции, обрезая лишнее */
+
+.section-gap20 {
+  min-height: 20vh; /* 1/3 высоты экрана */
 }
-.carousel-caption {
-  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
-  position: absolute;
-  top: 0; /* Растягиваем сверху */
-  left: 0; /* Растягиваем слева */
-  width: 100%; /* На всю ширину */
-  height: 100%; /* На всю высоту */
-  border-radius: 20px; /* Закругленные края в тон карусели */
-  display: flex; /* Flex для управления содержимым */
-  flex-direction: column; /* Вертикальное расположение текста */
-  justify-content: flex-start; /* Выравнивание сверху */
-  align-items: flex-start; /* Выравнивание слева */
-  padding: 30px; /* Отступы внутри фона */
+
+.section-gap10 {
+  min-height: 10vh; /* 1/3 высоты экрана */
 }
-.carousel-caption h1 {
-  color: white; /* Белый текст */
-  font-size: 5rem; /* Большой размер текста */
-  margin: 10px 0 10px 20px; /* Отступ снизу для расстояния до описания */
+
+.section-gap1 {
+  min-height: 1vh; /* 1/3 высоты экрана */
 }
-.carousel-caption p {
-  color: white; /* Белый текст для описания */
-  font-size: 2rem; /* Размер текста описания */
-  margin: 20px; /* Убираем лишние отступы */
-}
+

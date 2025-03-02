@@ -1,39 +1,103 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Навигация и карусель</title>
-    <!-- Подключаем Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="static/css/style.css" rel="stylesheet"> -->
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+
+    <!-- SEO приколы -->
+
+    <title>Климат Вам — Инженерные решения для вашего комфорта</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Климат Вам предлагает качественные инженерные решения: электропроводка, вентиляция, кондиционирование. Опыт 25 лет, более 80 успешных проектов." >
+    <meta name="keywords" content="инженерные решения, электропроводка, вентиляция, кондиционирование, климат вам, инженерные системы, монтаж вентиляции, установка кондиционеров, проектирование систем" >
+    <link rel="canonical" href="https://yourdomain.com/" > <!--TODO: ИСПРАВИТЬ -->
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Климат Вам — Инженерные решения для вашего комфорта" >
+    <meta property="og:description"
+        content="Климат Вам предлагает качественные инженерные решения: электропроводка, вентиляция, кондиционирование. Опыт 25 лет, более 80 успешных проектов." >
+    <meta property="og:image" content="https://yourdomain.com/static/images/og-image.jpg" > <!--TODO: ИСПРАВИТЬ -->
+    <meta property="og:url" content="https://yourdomain.com/" > <!--TODO: ИСПРАВИТЬ -->
+    <meta property="og:type" content="website" >
+
+    <!-- Twitter Cards Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" >
+    <meta name="twitter:title" content="Климат Вам — Инженерные решения для вашего комфорта" >
+    <meta name="twitter:description"
+        content="Климат Вам предлагает качественные инженерные решения: электропроводка, вентиляция, кондиционирование." >
+    <meta name="twitter:image" content="https://yourdomain.com/static/images/og-image.jpg" > <!--TODO: ИСПРАВИТЬ -->
+
+    <!-- Schema.org Markup -->  <!--TODO: ИСПРАВИТЬ -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Климат Вам",
+            "url": "https://yourdomain.com/",
+            "logo": "https://yourdomain.com/static/images/logo.png",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+7-XXX-XXX-XXXX",
+                "contactType": "customer service"
+            },
+            "sameAs": [
+                "https://facebook.com/yourcompany",
+                "https://instagram.com/yourcompany"
+            ]
+        }
+    </script>
+
+
+    <!-- Подключаем Bootstrap и AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" >
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" >
+
+    <!-- Подключаем стили -->
+    <link href="static/css/style.css" rel="stylesheet" >
+    <link href="static/css/about_company.css" rel="stylesheet" >
+    <link href="static/css/navigate.css" rel="stylesheet" >
+    <link href="static/css/services.css" rel="stylesheet" >
+    <link href="static/css/projects.css" rel="stylesheet" >
+    <link href="static/css/contact.css" rel="stylesheet" >
+    <link href="static/css/clients.css" rel="stylesheet" >
+    <link href="static/css/footer.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </head>
+
 <body>
     <!-- Навигация -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="margin-right: 80px;">
-                <img src="static/images/logo.png" alt="Логотип" height="60">
+            <a class="navbar-brand" href="#" style="margin-right: 80px">
+                <img src="static/images/logo.png" alt="Логотип" height="60" >
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCustom" aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCustom"
+                aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarCustom">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">О компании</a>
+                        <a class="nav-link" href="#about">О компании</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Услуги</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Наши проекты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Услуги</a>
+                        <a class="nav-link" href="#clients">Наши клиенты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Наши проекты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Наши клиенты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Связаться с нами</a>
+                        <a class="nav-link" href="#contact">Связаться с нами</a>
                     </li>
                 </ul>
             </div>
@@ -44,28 +108,27 @@
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="static/images/electro.jpg" class="d-block w-100" alt="Электроника">
+                <img src="static/images/electro.jpg" class="d-block w-100" alt="Электроника" >
                 <div class="carousel-caption">
                     <h1>Электроника</h1>
                     <p>Современные решения для вашего дома и бизнеса</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="static/images/conditioner.jpg" class="d-block w-100" alt="Вентиляция">
+                <img src="static/images/conditioner.jpg" class="d-block w-100" alt="Вентиляция" >
                 <div class="carousel-caption">
                     <h1>Вентиляция</h1>
                     <p>Чистый воздух и комфорт в любое время года</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="static/images/i.jpg" class="d-block w-100" alt="Кондиционеры">
+                <img src="static/images/i.jpg" class="d-block w-100" alt="Кондиционеры" >
                 <div class="carousel-caption">
                     <h1>Кондиционеры</h1>
                     <p>Охлаждение и тепло по вашим правилам</p>
                 </div>
             </div>
         </div>
-        <!-- Стрелочки управления -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Предыдущий</span>
@@ -76,7 +139,229 @@
         </button>
     </div>
 
-    <!-- Подключаем Bootstrap JS -->
+    <!-- Отступ между секциями -->
+    <div class="section-gap1"></div>
+
+    <!-- Раздел "О компании" -->
+    <section class="about-company container my-5" id="about">
+        <div class="text-center mb-4">
+            <h2 data-aos="fade-down">О компании</h2>
+            <p class="description" data-aos="fade-down" data-aos-delay="100">
+                <strong>«Климат Вам»</strong> — команда опытных специалистов,
+                создающих комфортные условия для жизни и работы. Мы предлагаем
+                <strong>качественные, современные и надёжные инженерные решения</strong>.
+            </p>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-4 mt-4" data-aos="fade-up" data-aos-delay="50">
+                <div class="about-card">
+                    <i class="bi bi-calendar-check about-icon icon-pink"></i>
+                    <h5>25 лет опыта</h5>
+                    <p>Надёжность, проверенная временем. Работаем с 1999 года.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="about-card">
+                    <i class="bi bi-building-check about-icon icon-blue"></i>
+                    <h5>80+ успешных проектов</h5>
+                    <p>От частных квартир до промышленных объектов.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="about-card">
+                    <i class="bi bi-award about-icon icon-purple"></i>
+                    <h5>Гарантия качества</h5>
+                    <p>
+                        Мы используем только сертифицированное оборудование и технологии.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="about-card">
+                    <i class="bi bi-tools about-icon icon-pink"></i>
+                    <h5>Полный цикл работ</h5>
+                    <p>Проектирование, монтаж и обслуживание инженерных систем.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="about-card">
+                    <i class="bi bi-stopwatch about-icon icon-blue"></i>
+                    <h5>Быстрое исполнение</h5>
+                    <p>От заявки до предложения всего <strong>2 дня</strong>.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="about-card">
+                    <i class="bi bi-house about-icon icon-purple"></i>
+                    <h5>Любые объекты</h5>
+                    <p>Работаем с квартирами, офисами, промышленными зданиями.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отступ между секциями -->
+    <div class="section-gap1"></div>
+
+    <!-- Раздел "Услуги" -->
+    <section class="services container my-5" id="services">
+        <div class="text-center mb-4">
+            <h2 data-aos="fade-down">Наши услуги</h2>
+            <p class="description" data-aos="fade-down" data-aos-delay="100">Выберите категорию услуг, чтобы
+                узнать подробнее.</p>
+        </div>
+
+        <!-- Кнопки переключения -->
+        <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+            <button class="btn btn-primary service-btn active" data-category="electronics">Электроника</button>
+            <button class="btn btn-primary service-btn" data-category="ventilation">Вентиляция</button>
+            <button class="btn btn-primary service-btn" data-category="conditioning">Кондиционирование</button>
+        </div>
+
+        <!-- Контейнер для карточек -->
+        <div class="row service-cards-container">
+            <!-- Карточки загружаются динамически -->
+        </div>
+    </section>
+
+    <!-- Отступ между секциями -->
+    <div class="section-gap1"></div>
+
+    <!-- Раздел "Наши проекты" -->
+    <section class="projects container my-5" id="projects">
+        <div class="text-center mb-4">
+            <h2 class="projects-title" data-aos="fade-down">Наши проекты</h2>
+            <p class="description" data-aos="fade-down" data-aos-delay="100">
+                Ознакомьтесь с нашими лучшими реализованными проектами.
+            </p>
+        </div>
+
+        <div id="projectsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                <!-- Карточки проектов будут добавляться динамически через JavaScript -->
+            </div>
+
+            <!-- Кнопки навигации -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Отступ между секциями -->
+
+
+    <section class="clients container my-5" id="clients">
+        <div class="text-center mb-4">
+            <h2 class="clients-title" data-aos="fade-down">Наши клиенты</h2>
+            <p class="clients-description" data-aos="fade-down" data-aos-delay="100">
+                Более 100 компаний доверили нам свои проекты
+            </p>
+        </div>
+
+        <!-- Контейнер для ленты -->
+        <div class="clients-track-wrapper">
+            <div class="clients-track" id="clientsTrack">
+                <!-- Логотипы будут добавлены динамически -->
+            </div>
+        </div>
+    </section>
+
+    <!-- После раздела "Наши клиенты" -->
+    <div class="section-gap1"></div>
+
+    <section class="contact container my-5" id="contact">
+        <div class="text-center mb-4">
+
+            <h2 class="section-title" data-aos="fade-down">Связаться с нами</h2>
+        </div>
+        <div class="contact-wrapper" data-aos="fade-down" data-aos-delay="100">
+            <div class="contact-form" data-aos="fade-up">
+                <div class="text-center mb-4">
+                    <h2 class="contact-subtitle">Я пока не придумал как оформить кароче!</h2>
+                </div>
+                <form id="callbackForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Ваше имя"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Номер телефона"
+                                pattern="\+?[0-9\s\-\(\)]+" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-content">
+                <!-- Колонка 1: Логотип и описание -->
+                <div class="col-md-4 mb-4">
+                    <img src="static/images/logo.png" alt="Логотип" class="footer-logo" height="50">
+                    <p class="footer-text mt-3">
+                        Комплексные решения для вашего комфорта. Профессиональный монтаж инженерных систем.
+                    </p>
+                </div>
+
+                <!-- Колонка 2: Контакты -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Контакты</h5>
+                    <ul class="footer-list">
+                        <li><i class="bi bi-geo-alt"></i> г. Минск, ул. Примерная, 15</li>
+                        <li><i class="bi bi-telephone"></i> +375 (29) 123-45-67</li>
+                        <li><i class="bi bi-envelope"></i> info@climatevam.by я написал хуйню потом поменяем</li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 3: Соцсети -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Мы в соцсетях</h5>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Копирайт -->
+            <div class="copyright text-center">
+                <p>© 2025 «Климат Вам». Все права защищены, пока что Беккелем</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Подключаем JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800, // Время анимации
+            easing: "ease-out",
+            once: true, // Запуск анимации один раз
+        });
+    </script>
+    <script src="static/js/script.js"></script>
+    <script src="static/js/navigation.js"></script>
+    <script src="static/js/clients.js"></script>
+    <script src="static/js/projects.js"></script>
+    <script src="static/js/contact.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

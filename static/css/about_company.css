@@ -1,0 +1,43 @@
+
+/* Выровняем высоту и ширину карточек */
+#about .row .col-md-4 {
+  display: flex;
+  flex-grow: 1; /* Равномерное распределение колонок */
+}
+
+#about .about-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Равномерное распределение */
+  height: 100%; /* Одинаковая высота */
+  width: 100%; /* Одинаковая ширина */
+}
+
+#about .about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Иконки */
+#about .about-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+/* Цвета иконок */
+.icon-pink {
+  color: #de0d82;
+}
+
+.icon-blue {
+  color: #00a0e3;
+}
+
+.icon-purple {
+  color: #654694;
+}
