@@ -1,4 +1,4 @@
-/* Фиксированная шапка */
+/* Фиксированная шапка с исправлениями */
 .navbar {
     position: fixed !important;
     top: 0;
@@ -8,6 +8,24 @@
     transition: top 0.5s ease;
     background: rgba(255, 255, 255, 0.95) !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Исправления */
+    max-width: 100vw;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-x: hidden;
+}
+
+/* Базовые настройки документа */
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    padding-top: 80px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Общие стили для навигации */
@@ -50,10 +68,21 @@
         margin-left: auto !important;
         justify-content: flex-end;
         gap: 15px;
+        /* Исправления */
+        max-width: calc(100% - 40px);
+        padding-right: 10px;
     }
 
     .nav-item:last-child .nav-link {
-        margin-right: 20px;
+        margin-right: 0; /* Убрали лишний отступ */
+    }
+
+    /* Выравнивание контейнера */
+    .navbar > .container-fluid {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
 
@@ -77,9 +106,6 @@
 }
 
 /* Отступ для контента под шапкой */
-body {
-    padding-top: 80px;
-}
 @media (max-width: 768px) {
     body {
         padding-top: 100px;
@@ -94,11 +120,6 @@ body {
     border-radius: 15px;
     overflow: hidden;
     height: 75vh;
-}
-@media (max-width: 768px) {
-    #carouselExample {
-        height: 50vh;
-    }
 }
 
 #carouselExample .carousel-inner,
@@ -145,10 +166,16 @@ body {
     font-size: 4.5rem;
     font-weight: bold;
 }
+
 @media (max-width: 768px) {
+    #carouselExample {
+        height: 50vh;
+    }
+    
     #carouselExample .carousel-caption h1 {
         font-size: 2.5rem;
     }
+    
     #carouselExample .carousel-caption p {
         font-size: 1.2rem;
     }
