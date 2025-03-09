@@ -1,71 +1,72 @@
-/* CSS (contact.css) */
-
-/* Для подзаголовка "Оставьте заявку!" */
-
+/* Фон и контейнер */
 .contact-wrapper {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('../images/contact-bg.jpg') center/cover;
     border-radius: 20px;
-    padding: 300px 400px; /* Увеличено */
+    padding: 60px; /* Меньше отступов */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    margin: 0 auto;
-    max-width: 1400px; /* Ширина формы */
 }
 
-.contact-form {
-    max-width: 600px; /* Увеличено */
-    margin: 0 auto;
-}
-
-.form-row {
-    display: flex;
-    gap: 20px; /* Расстояние между полями */
-    margin-bottom: 25px;
-}
-
-.form-group {
-    flex: 1; /* Равная ширина */
-}
-
-/* Исправленные стили кнопки */
-.btn-submit {
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 30px;
-    background: #de0d82;
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: Arial, sans-serif; /* Шрифт как в проекте */
-    text-transform: uppercase; /* Если нужно */
-    letter-spacing: 1px;
-}
-
+/* Заголовок */
 .contact-subtitle {
     font-family: Arial, sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 2rem;
-    display: inline-block;
-}
-
-/* Цвет для подзаголовка в форме */
-.contact-subtitle {
+    font-size: 1.8rem;
     color: #ffffff;
 }
 
+/* Поля ввода */
+.form-control {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Кнопка */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: #de0d82;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+    background: #c00b72;
+}
+
 /* Адаптивность */
-@media (max-width: 768px) {
-    .form-row {
-        flex-direction: column; /* Вертикально на мобильных */
-        gap: 15px;
+@media (max-width: 992px) {
+    .contact-wrapper {
+        padding: 40px;
     }
 
+    .contact-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
     .contact-wrapper {
-        padding: 40px 20px;
-        max-width: 95%;
+        padding: 30px;
+    }
+
+    .contact-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .btn-submit {
+        font-size: 0.9rem;
+        padding: 12px;
     }
 }
