@@ -23,7 +23,7 @@ document.getElementById('callbackForm').addEventListener('submit', async (e) => 
         button.disabled = true;
 
         // Отправка на API
-        const response = await fetch('http://37.193.53.6:8375/callback', {
+        const response = await fetch('http://90.189.160.162:8375/callback', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
