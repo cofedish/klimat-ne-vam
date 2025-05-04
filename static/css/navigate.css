@@ -172,15 +172,15 @@ body {
 
 @media (max-width: 768px) {
     #carouselExample {
-        height: 50vh;
+        height: 40vh;
     }
     
     #carouselExample .carousel-caption h1 {
-        font-size: 2.5rem;
+        font-size: 2.1rem;
     }
     
     #carouselExample .carousel-caption p {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 }
 
