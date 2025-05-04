@@ -28,7 +28,6 @@ body {
     width: 100%;
 }
 
-/* Общие стили для навигации */
 .nav-link {
     background-color: #00a0e3;
     color: white !important;
@@ -39,7 +38,11 @@ body {
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     white-space: nowrap;
+    width: 150px;
+    display: inline-block;
+    box-sizing: border-box;
 }
+
 
 .nav-link:hover {
     background-color: #0088c3;
