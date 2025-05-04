@@ -24,6 +24,7 @@ queue = Queue(connection=redis_conn, default_timeout=600)
 # Telegram config
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+print("TOKEN:", TELEGRAM_BOT_TOKEN, "\nCHAT_ID:", TELEGRAM_CHAT_ID)
 
 # Logging
 logging.basicConfig(level=logging.INFO)
