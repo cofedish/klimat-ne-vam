@@ -1,17 +1,10 @@
-# Используем официальный образ Python
-FROM python:3.9
+FROM python:3.11-slim
 
-# Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Копируем файлы проекта в контейнер
-COPY . .
-
-# Устанавливаем зависимости
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Указываем порт, который будет слушать API
-EXPOSE 8375
+COPY . .
 
-# Запускаем API-сервер (Flask) на порту 8375
-CMD ["python", "main.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8375", "--workers", "4", "--timeout", "120", "app:app"]
