@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+/*window.addEventListener("load", function () {
   // Получаем все элементы с классом .nav-link
   const navLinks = document.querySelectorAll(".nav-link");
 
@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
   navLinks.forEach((link) => {
     link.style.width = maxWidth + "px";
   });
-});
+});*/
 
 window.addEventListener("load", function () {
   // Получаем все кнопки с классом .service-btn
