@@ -1,6 +1,6 @@
 Flask
 Flask-Cors
 redis==5.0.1
-rq==1.16.1
+rq
 requests==2.31.0
 gunicorn==21.2.0
