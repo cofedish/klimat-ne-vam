@@ -76,6 +76,11 @@ def health_check():
 
 @app.route('/callback', methods=['POST', 'OPTIONS'])
 def callback():
+    # Проверяем, что запрос пришел с вашего сайта
+    origin = request.headers.get('Origin')
+    if origin not in ['https://climatvam-nsk.ru', 'http://localhost:8732']:  # Для dev
+        return jsonify({'error': 'Forbidden'}), 403
+        
     if request.method == 'OPTIONS':
         return jsonify({'status': 'preflight'}), 200
 
