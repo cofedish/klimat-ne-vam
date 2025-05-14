@@ -10,6 +10,12 @@
     filter: brightness(0) invert(1);
 }
 
+.footer iframe {
+    border-radius: 10px;
+    height: 250px;
+    width: 100%;
+}
+
 .footer-title {
     font-size: 1.2rem;
     font-weight: bold;
@@ -71,9 +77,9 @@
         justify-content: center;
     }
 
-    .footer-map {
-        width: 100%;
+    .footer iframe {
         margin-top: 20px;
+        height: 300px;
     }
 
     .social-links {
