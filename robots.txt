@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://climatvam-nsk.ru/sitemap.xml
