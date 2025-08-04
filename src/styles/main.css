@@ -1,0 +1,9 @@
+/* Импорт всех стилей */
+@import url('./style.css');
+@import url('./about_company.css');
+@import url('./navigate.css');
+@import url('./services.css');
+@import url('./projects.css');
+@import url('./contact.css');
+@import url('./clients.css');
+@import url('./footer.css');

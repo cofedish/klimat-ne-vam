@@ -1,0 +1,88 @@
+/* Основные стили футера */
+.footer {
+    background: #654694;
+    color: white;
+    padding: 40px 0 20px;
+    margin-top: 80px;
+}
+
+.footer-logo {
+    filter: brightness(0) invert(1);
+}
+
+.footer iframe {
+    border-radius: 10px;
+    height: 250px;
+    width: 100%;
+}
+
+.footer-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-list li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-list i {
+    font-size: 1.2rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    color: white;
+    font-size: 1.8rem;
+    transition: transform 0.3s;
+}
+
+.social-link:hover {
+    color: #de0d82;
+    transform: translateY(-3px);
+}
+
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .footer-content {
+        text-align: center;
+    }
+
+    .footer-list li {
+        justify-content: center;
+    }
+
+    .footer iframe {
+        margin-top: 20px;
+        height: 300px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}

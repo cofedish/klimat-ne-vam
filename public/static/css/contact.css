@@ -1,0 +1,72 @@
+/* Фон и контейнер */
+.contact-wrapper {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('../images/contact-bg.jpg') center/cover;
+    border-radius: 20px;
+    padding: 60px; /* Меньше отступов */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Заголовок */
+.contact-subtitle {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+/* Поля ввода */
+.form-control {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Кнопка */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: #de0d82;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+    background: #c00b72;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .contact-wrapper {
+        padding: 40px;
+    }
+
+    .contact-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-wrapper {
+        padding: 30px;
+    }
+
+    .contact-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .btn-submit {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+}

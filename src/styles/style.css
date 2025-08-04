@@ -1,0 +1,35 @@
+/* Кастомные стили для кнопок в навигации */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+
+h2 {
+  color: #654694;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 2rem;
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
+}
+
+p.description {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.section-gap20 {
+  min-height: 20vh; /* 1/3 высоты экрана */
+}
+
+.section-gap10 {
+  min-height: 10vh; /* 1/3 высоты экрана */
+}
+
+.section-gap1 {
+  min-height: 1vh; /* 1/3 высоты экрана */
+}
+

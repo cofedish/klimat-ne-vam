@@ -1,0 +1,159 @@
+/* Фиксированная шапка */
+.navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+}
+
+/* Базовые настройки */
+body {
+    padding-top: 80px;
+}
+
+.nav-link {
+    background-color: #00a0e3;
+    color: white !important;
+    border-radius: 20px;
+    padding: 8px 25px !important;
+    margin: 0 5px;
+    transition: all 0.3s;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+.nav-link:hover {
+    background-color: #0088c3;
+    transform: translateY(-2px);
+}
+
+/* Активная кнопка */
+.nav-link.active {
+    background: #654694 !important;
+}
+
+/* Последняя кнопка */
+.nav-item:last-child .nav-link {
+    background-color: #de0d82;
+}
+
+.nav-item:last-child .nav-link:hover {
+    background-color: #c00b72;
+}
+
+/* Десктопное меню */
+@media (min-width: 992px) {
+    .navbar-nav {
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+}
+
+/* Мобильное меню */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: rgba(255, 255, 255, 0.98);
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nav-link {
+        width: 100% !important;
+        max-width: none;
+        min-width: unset;
+        margin: 2px 0 !important;
+    }
+}
+
+/* Отступ для контента под шапкой */
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+}
+
+/* Стили для карусели */
+#carouselExample {
+    max-width: 80%;
+    margin: 20px auto;
+    padding-bottom: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 75vh;
+}
+
+#carouselExample .carousel-inner,
+#carouselExample .carousel-item {
+    border-radius: 15px;
+    height: 100%;
+}
+
+#carouselExample .carousel-inner img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#carouselExample .carousel-item {
+    position: relative;
+    border-radius: 15px;
+}
+
+#carouselExample .carousel-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+#carouselExample .carousel-caption {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    transform: translate(0, -10%);
+    z-index: 2;
+    text-align: left;
+    color: #fff;
+    width: 80%;
+    background: none;
+}
+
+#carouselExample .carousel-caption h1 {
+    font-size: 4.5rem;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    #carouselExample {
+        height: 45vh;
+    }
+
+    #carouselExample .carousel-caption h1 {
+        font-size: 2.1rem;
+    }
+
+    #carouselExample .carousel-caption p {
+        font-size: 1rem;
+    }
+}
+
+#carouselExample .carousel-caption p {
+    font-size: 2rem;
+    margin-top: 10px;
+}
